@@ -7,6 +7,7 @@
 # Directorys 
 CFG=$HOME/.cfg
 OHMYWM=$HOME/.config/xosx/ohmywm
+DWMBLOCKS=$HOME/.config/xosx/dwmblocks
 
 # Colors output
 BLACK="\033[1;90m"
@@ -51,7 +52,7 @@ fi
 # clone dotfiles bare repo
 printf '%b %s\n' "${PURPLE}Clonnig Dotfiles... ($CFG) ${NC}"
 git clone --bare https://github.com/xmawja/dotfiles.git $HOME/.cfg
-printf '%b %s\n' "${GREEN}Cloning Dotfiles ${RED}DONE. ${NC} \n"
+printf '%b %s\n' "${GREEN}Clone Dotfiles ${RED}DONE. ${NC} \n"
 
 # add dotfiles alisas 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -84,7 +85,7 @@ fi
 # clone ohmywm repo
 printf '%b %s\n' "${PURPLE}Cloning ohmywm... ($OHMYWM) ${NC}"
 git clone https://github.com/xmawja/ohmywm.git $HOME/.config/xosx/ohmywm
-printf '%b %s\n' "${GREEN}Cloning ohmywm ${RED}DONE. ${NC} \n"
+printf '%b %s\n' "${GREEN}Clone ohmywm ${RED}DONE. ${NC} \n"
 
 # chenge directory
 cd $HOME/.config/xosx/ohmywm
@@ -92,4 +93,25 @@ cd $HOME/.config/xosx/ohmywm
 printf '%b %s\n' "${CYAN}Installing ohmywm... ${NC}"
 sudo make clean install
 doas make clean install
-printf '%b %s\n' "${GREEN}Installing ohmywm ${RED}DONE. ${NC} \n"
+printf '%b %s\n' "${GREEN}Install ohmywm ${RED}DONE. ${NC} \n"
+
+#### install dwmblocks status bar
+# delete dwmblocks directorty if exist
+if [ -d "$DWMBLOCKS" ]; then
+	printf '%b %s\n' "${YELLOW}Removing old dwmblocks... ($DWMBLOCKS) ${NC}"
+	rm -rf "$DWMBLOCKS"
+	printf '%b %s\n' "${GREEN}Remove old dwmblocks ${RED}DONE. ${NC} \n"
+fi
+
+# Clone dwmblock repo
+printf '%b %s\n' "${PURPLE}Cloning dwmblocks... ($DWMBLOCKS) ${NC}"
+git clone https://github.com/xmawja/dwmblocks.git $HOME/.config/xosx/dwmblocks
+printf '%b %s\n' "${GREEN}Clone dwmblocks ${RED}DONE. ${NC} \n"
+
+# chenge directory
+cd $HOME/.config/xosx/dwmblocks
+# installing ..
+printf '%b %s\n' "${CYAN}Installing dwmblocks... ${NC}"
+sudo make clean install
+doas make celan install 
+printf '%b %s\n' "${GREEN}Install dwmblocks ${RED}DONE. ${NC} \n"
