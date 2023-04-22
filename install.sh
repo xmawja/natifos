@@ -10,6 +10,7 @@ OHMYWM=$HOME/.config/xosx/ohmywm
 DWMBLOCKS=$HOME/.config/xosx/dwmblocks
 TERMIX=$HOME/.config/xosx/termix
 FUNMACS=$HOME/.emacs.d
+VIMCO=$HOME/.config/nvim
 
 # Colors output
 BLACK="\033[1;90m"
@@ -155,3 +156,16 @@ fi
 printf '%b %s\n' "${PURPLE}Cloning funmacs... ($FUNMACS) ${NC}"
 git clone https://github.com/xmawja/funmacs.git $HOME/.emacs.d
 printf '%b %s\n' "${GREEN}Clone funmacs ${RED}DONE. ${NC} \n"
+
+#### VIMCO
+# delete nvim directorty if exist
+if [ -d "$VIMCO" ]; then
+	printf '%b %s\n' "${YELLOW}Removing old vimco... ($VIMCO) ${NC}" 
+	rm -rf "$VIMCO"
+	printf '%b %s\n' "${GREEN}Remove old vimco ${RED}DONE. ${NC} \n"
+fi
+
+# clone vimco repo
+printf '%b %s\n' "${PURPLE}Cloning vimco... ($VIMCO) ${NC}"
+git clone https://github.com/xmawja/vimco.git $HOME/.config/nvim
+printf '%b %s\n' "${GREEN}Clone vimco ${RED}DONE. ${NC} \n"
