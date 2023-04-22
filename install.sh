@@ -6,6 +6,7 @@
 #########################################################################
 # Directorys 
 CFG=$HOME/.cfg
+OHMYWM=$HOME/.config/xosx/ohmywm
 
 # Colors output
 BLACK="\033[1;90m"
@@ -42,9 +43,9 @@ done
 #### DOTFILES
 # delete old cfg file if exist
 if [ -d "$CFG" ]; then
-	printf '%b %s\n' "${YELLOW}Removing cfg... ($CFG) ${NC}"
+	printf '%b %s\n' "${YELLOW}Removing old cfg... ($CFG) ${NC}"
 	rm -rf "$CFG"
-	printf '%b %s\n' "${GREEN}Removing cfg ${RED}DONE.  ${NC} \n"
+	printf '%b %s\n' "${GREEN}Remove old cfg ${RED}DONE.  ${NC} \n"
 fi
 
 # clone dotfiles bare repo
@@ -61,9 +62,34 @@ rm $HOME/.bash_history
 rm $HOME/.bash_logout
 rm $HOME/.bash_profile
 rm $HOME/.bashrc
-printf '%b %s\n' "${GREEN}Removing bash old releated files ${RED}DONE. ${NC} \n"
+printf '%b %s\n' "${GREEN}Remove bash old releated files ${RED}DONE. ${NC} \n"
 
 # checkout dofiles repo
 printf '%b %s\n' "${PURPLE}Checkingout Dotfiles... ($CFG) ${NC}"
 config checkout
 printf '%b %s\n' "${GREEN}Checkout Dotfiles ${RED}DONE. ${NC} \n"
+
+
+#######################################################################
+#                           Desktop Environment                       #
+#######################################################################
+# XORG
+#### install ohmywm window manager
+# delete ohmywm directorty if exist
+if [ -d "$OHMYWM" ]; then
+	printf '%b %s\n' "${YELLOW}Removing old OhMyWm... ($OHMYWM) ${NC}"
+	rm -rf "$OHMYWM"
+	printf '%b %s\n' "${GREEN}Remove old OhMyWm ${RED}DONE. ${NC} \n"
+fi
+# clone ohmywm repo
+printf '%b %s\n' "${PURPLE}Cloning ohmywm... ($OHMYWM) ${NC}"
+git clone https://github.com/xmawja/ohmywm.git $HOME/.config/xosx/ohmywm
+printf '%b %s\n' "${GREEN}Cloning ohmywm ${RED}DONE. ${NC} \n"
+
+# chenge directory
+cd $HOME/.config/xosx/ohmywm
+# installing..
+printf '%b %s\n' "${CYAN}Installing ohmywm... ${NC}"
+sudo make clean install
+doas make clean install
+printf '%b %s\n' "${GREEN}Installing ohmywm ${RED}DONE. ${NC} \n"
