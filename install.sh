@@ -9,6 +9,7 @@ CFG=$HOME/.cfg
 OHMYWM=$HOME/.config/xosx/ohmywm
 DWMBLOCKS=$HOME/.config/xosx/dwmblocks
 TERMIX=$HOME/.config/xosx/termix
+FUNMACS=$HOME/.emacs.d
 
 # Colors output
 BLACK="\033[1;90m"
@@ -138,3 +139,19 @@ sudo make clean install
 doas make clean install
 printf '%b %s\n' "${GREEN}Install termix ${RED}DONE. ${NC} \n"
 
+
+##################################################################
+#                         Applications                           #
+##################################################################
+#### EMACS
+# delete funmacs directorty if exist
+if [ -d "$FUNMACS" ]; then
+	printf '%b %s\n' "${YELLOW}Removing old funmacs... ($FUNMACS) ${NC}" 
+	rm -rf "$FUNMACS"
+	printf '%b %s\n' "${GREEN}Remove old funmacs ${RED}DONE. ${NC} \n"
+fi
+
+# Clone funmacs repo
+printf '%b %s\n' "${PURPLE}Cloning funmacs... ($FUNMACS) ${NC}"
+git clone https://github.com/xmawja/funmacs.git $HOME/.emacs.d
+printf '%b %s\n' "${GREEN}Clone funmacs ${RED}DONE. ${NC} \n"
