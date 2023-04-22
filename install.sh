@@ -4,6 +4,9 @@
 ########################################################################
 #                         Environment Variables                        #
 #########################################################################
+# Directorys 
+CFG=$HOME/.cfg
+
 # Colors output
 BLACK="\033[1;90m"
 RED="\033[1;91m"
@@ -35,3 +38,32 @@ while true; do
 		* ) printf '%b %s\n' "${RED}Please answer yes or no. ${NC}";;
 	esac
 done
+
+#### DOTFILES
+# delete old cfg file if exist
+if [ -d "$CFG" ]; then
+	printf '%b %s\n' "${YELLOW}Removing cfg... ($CFG) ${NC}"
+	rm -rf "$CFG"
+	printf '%b %s\n' "${GREEN}Removing cfg ${RED}DONE.  ${NC} \n"
+fi
+
+# clone dotfiles bare repo
+printf '%b %s\n' "${PURPLE}Clonnig Dotfiles... ($CFG) ${NC}"
+git clone --bare https://github.com/xmawja/dotfiles.git $HOME/.cfg
+printf '%b %s\n' "${GREEN}Cloning Dotfiles ${RED}DONE. ${NC} \n"
+
+# add dotfiles alisas 
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# remove bash releated files if existing
+printf '%b %s\n' "${PURPLE}Removing bash old releated files... ${NC}"
+rm $HOME/.bash_history
+rm $HOME/.bash_logout
+rm $HOME/.bash_profile
+rm $HOME/.bashrc
+printf '%b %s\n' "${GREEN}Removing bash old releated files ${RED}DONE. ${NC} \n"
+
+# checkout dofiles repo
+printf '%b %s\n' "${PURPLE}Checkingout Dotfiles... ($CFG) ${NC}"
+config checkout
+printf '%b %s\n' "${GREEN}Checkout Dotfiles ${RED}DONE. ${NC} \n"
