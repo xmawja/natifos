@@ -8,6 +8,7 @@
 CFG=$HOME/.cfg
 OHMYWM=$HOME/.config/xosx/ohmywm
 DWMBLOCKS=$HOME/.config/xosx/dwmblocks
+TERMIX=$HOME/.config/xosx/termix
 
 # Colors output
 BLACK="\033[1;90m"
@@ -115,3 +116,25 @@ printf '%b %s\n' "${CYAN}Installing dwmblocks... ${NC}"
 sudo make clean install
 doas make celan install 
 printf '%b %s\n' "${GREEN}Install dwmblocks ${RED}DONE. ${NC} \n"
+
+#### install termix terminal emolution
+# delete termix directorty if exist
+if [ -d "$TERMIX" ]; then
+	printf '%b %s\n' "${YELLOW}Removing old termix... ($TERMIX) ${NC}" 
+	rm -rf "$TERMIX"
+	printf '%b %s\n' "${GREEN}Remove old termix ${RED}DONE. ${NC} \n"
+fi
+
+# Clone termix repo
+printf '%b %s\n' "${PURPLE}Cloning termix... ($TERMIX) ${NC}"
+git clone https://github.com/xmawja/termix.git $HOME/.config/xosx/termix
+printf '%b %s\n' "${GREEN}Clone termix ${RED}DONE. ${NC} \n"
+
+# Chenge Directory
+cd $HOME/.config/xosx/termix
+# Installing ..
+printf '%b %s\n' "${CYAN}Installing termix... ${NC}"
+sudo make clean install
+doas make clean install
+printf '%b %s\n' "${GREEN}Install termix ${RED}DONE. ${NC} \n"
+
